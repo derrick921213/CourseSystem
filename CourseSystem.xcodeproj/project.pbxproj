@@ -23,6 +23,7 @@
 		4995A4FB2BB007D600CFA393 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4995A4FD2BB007D600CFA393 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4995A5002BB007D600CFA393 /* CourseSystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CourseSystem.xcdatamodel; sourceTree = "<group>"; };
+		4995A5072BB009FC00CFA393 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +40,7 @@
 		4995A4E82BB007D400CFA393 = {
 			isa = PBXGroup;
 			children = (
+				4995A5072BB009FC00CFA393 /* README.md */,
 				4995A4F32BB007D400CFA393 /* CourseSystem */,
 				4995A4F22BB007D400CFA393 /* Products */,
 			);
