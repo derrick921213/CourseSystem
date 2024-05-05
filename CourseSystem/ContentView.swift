@@ -1,86 +1,99 @@
-//
-//  ContentView.swift
-//  CourseSystem
-//
-//  Created by derrick on 2024/3/24.
-//
+    //
+    //  ContentView.swift
+    //  CourseSystem
+    //
+    //  Created by derrick on 2024/3/24.
+    //
 
 import SwiftUI
-import CoreData
+import UIKit
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        _ = scanner.scanString("#")
+        
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+        
+        let r = Double((rgbValue >> 16) & 0xFF) / 255.0
+        let g = Double((rgbValue >> 8) & 0xFF) / 255.0
+        let b = Double(rgbValue & 0xFF) / 255.0
+        self.init(red: r, green: g, blue: b)
+    }
+}
+extension UIColor {
+    convenience init(hex: String) {
+        let scanner = Scanner(string: hex)
+        _ = scanner.scanString("#")
+        
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+        
+        let r = CGFloat((rgbValue >> 16) & 0xFF) / 255.0
+        let g = CGFloat((rgbValue >> 8) & 0xFF) / 255.0
+        let b = CGFloat(rgbValue & 0xFF) / 255.0
+        self.init(red: r, green: g, blue: b, alpha: 1.0)
+    }
+}
 
-struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+struct SettingsView: View {
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        VStack {
+            HeaderView()
+            Text("Setting")
+            Spacer()
+        }
+       
+    }
+}
+struct HeaderView: View {
+    var body: some View {
+        VStack {
+            HStack {
+                Spacer()
+                Image(systemName: "envelope.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(Color(hex:"#FCEBD1"))
+                    .padding(.trailing, 10)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+            .padding()
+            .background(Color(hex:"#9E5858"))
+            .edgesIgnoringSafeArea(.top)
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+}
+struct ContentView: View {
+    init() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.backgroundColor = UIColor(hex: "#9E5858")
+        tabBarAppearance.stackedLayoutAppearance.normal.iconColor = UIColor(hex: "#FCEBD1")
+        tabBarAppearance.stackedLayoutAppearance.selected.iconColor = UIColor(hex: "#ffd700")
+        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(hex: "#ffd700")]
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        if #available(iOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         }
+        
+        UITabBar.appearance().isTranslucent = true
     }
+    
+    var body: some View {
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+        TabView {
+            Home()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+            
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
 }
