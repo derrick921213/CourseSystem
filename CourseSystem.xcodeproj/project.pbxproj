@@ -63,15 +63,13 @@
 		4995A4F32BB007D400CFA393 /* CourseSystem */ = {
 			isa = PBXGroup;
 			children = (
+				49BF86122BE85F6400EA6844 /* Pages */,
 				4995A4F42BB007D400CFA393 /* CourseSystemApp.swift */,
 				4995A4F62BB007D400CFA393 /* ContentView.swift */,
 				4995A4F82BB007D600CFA393 /* Assets.xcassets */,
 				4995A4FD2BB007D600CFA393 /* Persistence.swift */,
 				4995A4FF2BB007D600CFA393 /* CourseSystem.xcdatamodeld */,
 				4995A4FA2BB007D600CFA393 /* Preview Content */,
-				49BF860C2BE830A500EA6844 /* Test.swift */,
-				49BF860E2BE8318A00EA6844 /* TestCore.swift */,
-				49BF86102BE83EA400EA6844 /* Home.swift */,
 			);
 			path = CourseSystem;
 			sourceTree = "<group>";
@@ -82,6 +80,16 @@
 				4995A4FB2BB007D600CFA393 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		49BF86122BE85F6400EA6844 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				49BF86102BE83EA400EA6844 /* Home.swift */,
+				49BF860E2BE8318A00EA6844 /* TestCore.swift */,
+				49BF860C2BE830A500EA6844 /* Test.swift */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
