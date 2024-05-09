@@ -35,6 +35,63 @@ extension UIColor {
     }
 }
 
+struct HeaderView: View {
+    var body: some View {
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                HStack {
+                    Spacer(minLength: 0)
+                    NavigationLink(destination: DetailView()) {
+                        Image(systemName: "envelope.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(Color(hex: "#FCEBD1"))
+                            .padding(.trailing, 15)
+                    }
+                }
+                .padding(.vertical, 10)
+                .frame(height: geometry.safeAreaInsets.top)
+                .background(Color(hex: "#9E5858"))
+            }
+            .frame(height: 60)
+        }
+        .frame(height: 60)
+    }
+}
+struct TailView: View {
+    @State public var selectedTab: Int
+    var body: some View{
+        NavigationStack {
+            TabView(selection: $selectedTab) {
+                Text("First Page")
+                    .tabItem {
+                        Label("課程瀏覽",systemImage: "rectangle.and.text.magnifyingglass")
+                    }
+                    .tag(1)
+                Text("Second Page")
+                    .tabItem {
+                        Label("加退選",systemImage: "square.and.at.rectangle")
+                    }
+                    .tag(2)
+                Home()
+                    .tabItem {
+                        Label("首頁",systemImage: "house")
+                    }
+                    .tag(3)
+                Text("Forth Page")
+                    .tabItem {
+                        Label("課程表",systemImage: "calendar")
+                    }
+                    .tag(4)
+                Text("Five Page")
+                    .tabItem {
+                        Label("學分統計",systemImage: "list.bullet.clipboard")
+                    }
+                    .tag(5)
+            }
+        }
+    }
+}
+
 @main
 struct CourseSystemApp: App {
     let persistenceController = PersistenceController.shared
