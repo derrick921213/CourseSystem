@@ -62,7 +62,8 @@ struct TailView: View {
     var body: some View{
         NavigationStack {
             TabView(selection: $selectedTab) {
-                Text("First Page")
+//                Text("First Page")
+                Test()
                     .tabItem {
                         Label("課程瀏覽",systemImage: "rectangle.and.text.magnifyingglass")
                     }
