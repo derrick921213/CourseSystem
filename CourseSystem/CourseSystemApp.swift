@@ -36,10 +36,22 @@ extension UIColor {
 }
 
 struct HeaderView: View {
+    @Binding var title: String
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 HStack {
+//                    Rectangle()
+//                        .foregroundColor(.clear)
+//                        .frame(width: 60)
+//                        .border(Color.black, width: 1.5)
+                    Spacer().frame(width: 60)
+                    Text(title)
+                        .font(.title)
+                        .foregroundColor(Color(hex: "#FCEBD1"))
+//                        .border(Color.black, width: 1.5)
+                        .frame(maxWidth: .infinity)
+//                        .border(Color.red, width: 1.5)
                     Spacer(minLength: 0)
                     NavigationLink(destination: DetailView()) {
                         Image(systemName: "envelope.fill")
@@ -62,7 +74,7 @@ struct TailView: View {
     var body: some View{
         NavigationStack {
             TabView(selection: $selectedTab) {
-                Text("First Page")
+                CourseSearch()
                     .tabItem {
                         Label("課程瀏覽",systemImage: "rectangle.and.text.magnifyingglass")
                     }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Home: View {
+    @State private var currentPageTitle = "首頁"
     let data: [String] = [
         "學生繳費依據本校學雜費收費標準表辦理。",
         "延修生若於加選截止日（學分費核算基準.......",
@@ -18,8 +19,8 @@ struct Home: View {
     ]
     var body: some View {
         NavigationView {
-            VStack {
-                HeaderView()
+            VStack {                
+                HeaderView(title: $currentPageTitle)
                 HStack{
                     Image("松鼠2")
                         .resizable()
@@ -38,7 +39,6 @@ struct Home: View {
                         .padding(.leading,10)
                         .foregroundStyle(Color.white)
                         .zIndex(2)
-                        //                        .border(.green)
                     Rectangle()
                         .foregroundColor(.clear)
                         .background(Color(hex: "#862E2E").opacity(0.50))
