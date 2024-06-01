@@ -1,9 +1,9 @@
-//
-//  CourseSystemApp.swift
-//  CourseSystem
-//
-//  Created by derrick on 2024/3/24.
-//
+    //
+    //  CourseSystemApp.swift
+    //  CourseSystem
+    //
+    //  Created by derrick on 2024/3/24.
+    //
 
 import SwiftUI
 extension Color {
@@ -35,40 +35,62 @@ extension UIColor {
     }
 }
 
+    //struct HeaderView: View {
+    //    @Binding var title: String
+    //    var body: some View {
+    ////        GeometryReader { geometry in
+    //            VStack{
+    //                HStack {
+    //                    Spacer().frame(width: 60)
+    //                    Text(title)
+    //                        .font(.title)
+    //                        .foregroundColor(Color(hex: "#FCEBD1"))
+    ////                        .border(Color.black, width: 1.5)
+    //                        .frame(maxWidth: .infinity)
+    ////                        .border(Color.red, width: 1.5)
+    //                    Spacer(minLength: 0)
+    //                    NavigationLink(destination: DetailView()) {
+    //                        Image(systemName: "envelope.fill")
+    //                            .font(.largeTitle)
+    //                            .foregroundColor(Color(hex: "#FCEBD1"))
+    //                            .padding(.trailing, 15)
+    //                    }
+    //                }
+    //                .padding(.vertical, 10)
+    ////                .frame(height: geometry.safeAreaInsets.top)
+    //                .background(Color(hex: "#9E5858"))
+    //            }
+    //            .frame(height: 60)
+    ////        }
+    ////        .frame(height: 60)
+    //    }
+    //}
+
 struct HeaderView: View {
     @Binding var title: String
     var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 0) {
-                HStack {
-//                    Rectangle()
-//                        .foregroundColor(.clear)
-//                        .frame(width: 60)
-//                        .border(Color.black, width: 1.5)
-                    Spacer().frame(width: 60)
-                    Text(title)
-                        .font(.title)
+        VStack(spacing: 0) {
+            HStack {
+                Spacer().frame(width: 60)
+                Text(title)
+                    .font(.title)
+                    .foregroundColor(Color(hex: "#FCEBD1"))
+                    .frame(maxWidth: .infinity)
+                Spacer(minLength: 0)
+                NavigationLink(destination: DetailView()) {
+                    Image(systemName: "envelope.fill")
+                        .font(.largeTitle)
                         .foregroundColor(Color(hex: "#FCEBD1"))
-//                        .border(Color.black, width: 1.5)
-                        .frame(maxWidth: .infinity)
-//                        .border(Color.red, width: 1.5)
-                    Spacer(minLength: 0)
-                    NavigationLink(destination: DetailView()) {
-                        Image(systemName: "envelope.fill")
-                            .font(.largeTitle)
-                            .foregroundColor(Color(hex: "#FCEBD1"))
-                            .padding(.trailing, 15)
-                    }
+                        .padding(.trailing, 15)
                 }
-                .padding(.vertical, 10)
-                .frame(height: geometry.safeAreaInsets.top)
-                .background(Color(hex: "#9E5858"))
             }
-            .frame(height: 60)
+            .padding(.vertical, 10)
+            .background(Color(hex: "#9E5858"))
         }
         .frame(height: 60)
     }
 }
+
 struct TailView: View {
     @State public var selectedTab: Int
     var body: some View{
@@ -79,7 +101,7 @@ struct TailView: View {
                         Label("課程瀏覽",systemImage: "rectangle.and.text.magnifyingglass")
                     }
                     .tag(1)
-                Text("Second Page")
+                add()
                     .tabItem {
                         Label("加退選",systemImage: "square.and.at.rectangle")
                     }
@@ -89,12 +111,12 @@ struct TailView: View {
                         Label("首頁",systemImage: "house")
                     }
                     .tag(3)
-                Text("Forth Page")
+                TimeTable()
                     .tabItem {
                         Label("課程表",systemImage: "calendar")
                     }
                     .tag(4)
-                Text("Five Page")
+                score()
                     .tabItem {
                         Label("學分統計",systemImage: "list.bullet.clipboard")
                     }
